@@ -1,5 +1,6 @@
 package com.popda.weatherforcast.ui.weather_screen
 
+import android.Manifest
 import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,11 +13,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.florent37.runtimepermission.RuntimePermission.askPermission
 import com.popda.weatherforcast.R
 import com.popda.weatherforcast.data.entity.WeatherForecast
 import com.popda.weatherforcast.util.ToolbarBehavior
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.weather_forecast_fragment.*
+
 import javax.inject.Inject
 
 class WeatherForecastFragment : Fragment() {
@@ -31,6 +34,7 @@ class WeatherForecastFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        askPermissions()
         AndroidSupportInjection.inject(this)
         viewModel = ViewModelProvider(this, viewModelFactory).get(WeatherForecastViewModel::class.java)
         return inflater.inflate(R.layout.weather_forecast_fragment, container, false)
@@ -73,6 +77,10 @@ class WeatherForecastFragment : Fragment() {
         geoBtn.setOnClickListener {
             viewModel.getCurrLocation(activity as Activity)
         }
+    }
+
+    private fun askPermissions(){
+        askPermission(this, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION).ask()
     }
 
 }
