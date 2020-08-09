@@ -1,10 +1,11 @@
-package com.popda.weatherforcast.ui
+package com.popda.weatherforcast.ui.search_screen
 
 import androidx.annotation.Nullable
 import androidx.recyclerview.widget.DiffUtil
+import com.popda.weatherforcast.data.entity.CityEntity
 import com.popda.weatherforcast.data.entity.WeatherForecast
 
-class ForecastDiffCallBack (private val oldList: List<WeatherForecast>, private val newList: List<WeatherForecast>) : DiffUtil.Callback() {
+class CityNameDiffCallBack (private val oldList: List<CityEntity>, private val newList: List<CityEntity>) : DiffUtil.Callback() {
 
     override fun getOldListSize(): Int = oldList.size
 

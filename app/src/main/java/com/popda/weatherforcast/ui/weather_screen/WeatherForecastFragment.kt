@@ -1,16 +1,19 @@
-package com.popda.weatherforcast.ui
+package com.popda.weatherforcast.ui.weather_screen
 
 import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.popda.weatherforcast.R
 import com.popda.weatherforcast.data.entity.WeatherForecast
+import com.popda.weatherforcast.util.ToolbarBehavior
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.weather_forecast_fragment.*
 import javax.inject.Inject
@@ -19,7 +22,6 @@ class WeatherForecastFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-
     private lateinit var viewModel: WeatherForecastViewModel
 
     override fun onCreateView(
@@ -35,6 +37,8 @@ class WeatherForecastFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         initRecyclerView()
         listenViewModel()
+        initSearchButton()
+        (appbar.layoutParams as CoordinatorLayout.LayoutParams).behavior = ToolbarBehavior()
         viewModel.getCurrLocation(activity as Activity)
     }
 
@@ -47,12 +51,19 @@ class WeatherForecastFragment : Fragment() {
 
     private fun updateListWithData(list: List<WeatherForecast>){
         (recyclerView.adapter as WeatherAdapter).setData(list)
+        if (viewModel.currCity.isNotBlank()) cityTv.text = resources.getString(R.string.city_name, viewModel.currCity)
     }
 
     private fun listenViewModel(){
         viewModel.weatherLiveData.observe(viewLifecycleOwner, Observer {
             updateListWithData(it)
         })
+    }
+
+    private fun initSearchButton(){
+        drawerIcon.setOnClickListener {
+            findNavController().navigate(R.id.action_weatherForecastFragment_to_searchFragment)
+        }
     }
 
 }

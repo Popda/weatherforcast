@@ -4,15 +4,16 @@ import android.content.Context
 import android.location.Geocoder
 import com.popda.weatherforcast.data.WeatherApi
 import com.popda.weatherforcast.data.entity.BaseResponse
+import retrofit2.Call
 import javax.inject.Inject
 
 class WeatherRemoteDataSource @Inject constructor(private val  api : WeatherApi) : WeatherDataSource {
 
-    override fun getWeatherByGeo(lat: Double, long: Double): BaseResponse {
+    override fun getWeatherByGeo(lat: Double, long: Double): Call<BaseResponse> {
         return api.getWeatherByGeoCords(lat, long)
     }
 
-    override fun getWeatherByCityName(cityName: String, context: Context): BaseResponse {
+    override fun getWeatherByCityName(cityName: String, context: Context): Call<BaseResponse> {
         val latLong = getCityGeo(context, cityName)
         return getWeatherByGeo(latLong.first, latLong.second)
     }

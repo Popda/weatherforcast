@@ -7,7 +7,21 @@
 
     <fragment
         android:id="@+id/weatherForecastFragment"
-        android:name="com.popda.weatherforcast.ui.WeatherForecastFragment"
+        android:name="com.popda.weatherforcast.ui.weather_screen.WeatherForecastFragment"
         android:label="weather_forecast_fragment"
-        tools:layout="@layout/weather_forecast_fragment" />
+        tools:layout="@layout/weather_forecast_fragment" >
+        <action
+            android:id="@+id/action_weatherForecastFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.popda.weatherforcast.ui.search_screen.SearchFragment"
+        android:label="search_fragment"
+        tools:layout="@layout/search_fragment" >
+        <action
+            android:id="@+id/action_searchFragment_to_weatherForecastFragment"
+            app:destination="@id/weatherForecastFragment"
+            app:launchSingleTop="true" />
+    </fragment>
 </navigation>

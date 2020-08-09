@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Mon, Apr 10"
+            tools:text="Mon, Apr 10"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Sky is clear"
+            tools:text="Sky is clear"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dateTv" />
 
@@ -45,13 +45,14 @@
 
         <ImageView
             android:id="@+id/weatherIv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginEnd="24dp"
             app:layout_constraintBottom_toBottomOf="@+id/temperatureTv"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/temperatureTv"
-            app:srcCompat="@drawable/ic_launcher_background" />
+            app:srcCompat="@drawable/ic_launcher_background"
+            android:contentDescription="@string/weather" />
 
         <ImageView
             android:id="@+id/windIv"
@@ -61,7 +62,8 @@
             android:layout_marginTop="24dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/temperatureTv"
-            app:srcCompat="@drawable/ic_windy" />
+            app:srcCompat="@drawable/ic_windy"
+            android:contentDescription="@string/wind_speed_title" />
 
         <ImageView
             android:id="@+id/humidityIv"
@@ -71,14 +73,15 @@
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/windIv"
-            app:srcCompat="@drawable/ic_humidity" />
+            app:srcCompat="@drawable/ic_humidity"
+            android:contentDescription="@string/humidity_title" />
 
         <TextView
             android:id="@+id/windTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="TextView"
+            tools:text="TextView"
             app:layout_constraintBottom_toBottomOf="@+id/windIv"
             app:layout_constraintStart_toEndOf="@+id/windIv"
             app:layout_constraintTop_toTopOf="@+id/windIv" />
@@ -88,7 +91,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="TextView"
+            tools:text="TextView"
             app:layout_constraintBottom_toBottomOf="@+id/humidityIv"
             app:layout_constraintStart_toEndOf="@+id/humidityIv"
             app:layout_constraintTop_toTopOf="@+id/humidityIv" />

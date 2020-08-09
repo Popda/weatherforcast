@@ -1,4 +1,4 @@
-package com.popda.weatherforcast.ui
+package com.popda.weatherforcast.ui.weather_screen
 
 import android.icu.text.MeasureFormat
 import android.icu.text.MeasureFormat.FormatWidth
@@ -15,8 +15,8 @@ import com.popda.weatherforcast.R
 import com.popda.weatherforcast.data.entity.WeatherForecast
 import kotlinx.android.synthetic.main.weather_forecast_item.view.*
 import java.time.Instant
-import java.time.LocalDateTime
 import java.time.ZoneId
+import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
 
@@ -38,7 +38,11 @@ class WeatherAdapter : RecyclerView.Adapter<WeatherAdapter.WeatherViewHolder>() 
     }
 
     fun setData(newList: List<WeatherForecast>) {
-        val diffCallback = ForecastDiffCallBack(weatherForecastList, newList)
+        val diffCallback =
+            ForecastDiffCallBack(
+                weatherForecastList,
+                newList
+            )
         val diffResult = DiffUtil.calculateDiff(diffCallback)
         weatherForecastList.clear()
         weatherForecastList.addAll(newList)
@@ -50,11 +54,11 @@ class WeatherAdapter : RecyclerView.Adapter<WeatherAdapter.WeatherViewHolder>() 
         fun bindTo(weatherForecast: WeatherForecast){
             itemView.apply {
                 weatherIv.load("http://openweathermap.org/img/wn/${weatherForecast.weather[0].icon}@2x.png")
-                dateTv.text = LocalDateTime.ofInstant(Instant.ofEpochSecond(weatherForecast.dt), ZoneId.systemDefault()).format(
-                    DateTimeFormatter.RFC_1123_DATE_TIME)
+                dateTv.text = ZonedDateTime.ofInstant(Instant.ofEpochMilli(weatherForecast.dt*1000),
+                    ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern("EE, MMM d"))
                 weatherDescriptionTv.text = weatherForecast.weather[0].description
                 temperatureTv.text = fmt.format(Measure(weatherForecast.temp.day.toInt(), MeasureUnit.CELSIUS))
-                windTv.text = resources.getString(R.string.wind_speed, weatherForecast.wind_speed)
+                windTv.text = resources.getString(R.string.wind_speed, weatherForecast.wind_speed.toInt())
                 humidityTv.text =  resources.getString(R.string.humidity, weatherForecast.humidity)
             }
         }

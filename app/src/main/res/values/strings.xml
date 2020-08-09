@@ -1,6 +1,16 @@
 <resources>
     <string name="app_name">Weather Forecast</string>
     <string name="wind_speed">%1$d m/s</string>
-    <string name="humidity">%1$d \%</string>
-
+    <string name="humidity">%1$d %%</string>
+    <string name="city_name">Weather in %1$s</string>
+    <string name="favorite">Favorite</string>
+    <string name="new_items">New</string>
+    <string name="add_to_favorite">Add to Favorite</string>
+    <string name="search">Search</string>
+    <string name="humidity_title">humidity</string>
+    <string name="wind_speed_title">wind speed</string>
+    <string name="weather">weather</string>
+    <string name="city_name_hint">City name</string>
+    <string name="header">HEADER</string>
+    <string name="search_different_city_button">Search different city button</string>
 </resources>

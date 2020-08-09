@@ -14,7 +14,7 @@ class ToolbarBehavior : CoordinatorLayout.Behavior<AppBarLayout>() {
     private var toolbarOriginalHeight: Float = -1f
     private var toolbarCollapsedHeight: Float = -1f
     private var viewsSet = false
-    private var minScale = 0.6f
+    private var minScale = 0.4f
 
     /**
      * Set the required view variables. Only accessed once because of the viewsSet variable.
@@ -23,9 +23,9 @@ class ToolbarBehavior : CoordinatorLayout.Behavior<AppBarLayout>() {
         if (viewsSet) return
         viewsSet = true
 
-//        toolbar = child.findViewById(R.id.appbar_container)
-//        toolbarTitle = toolbar.findViewById(R.id.toolbar_title)
-//        drawerIcon = toolbar.findViewById(R.id.drawer_icon)
+        toolbar = child.findViewById(R.id.appbarContainer)
+        toolbarTitle = toolbar.findViewById(R.id.toolbarTitle)
+        drawerIcon = toolbar.findViewById(R.id.drawerIcon)
 
         toolbarOriginalHeight = toolbar.layoutParams.height.toFloat()
         toolbarCollapsedHeight = toolbarOriginalHeight * minScale
@@ -72,11 +72,6 @@ class ToolbarBehavior : CoordinatorLayout.Behavior<AppBarLayout>() {
                 var translate: Float = (toolbarOriginalHeight - toolbar.layoutParams.height) / (toolbarOriginalHeight - toolbarCollapsedHeight)
                 translate *= toolbarOriginalHeight
                 drawerIcon.translationY = -translate
-
-                //--- title
-                val scale = toolbar.layoutParams.height / toolbarOriginalHeight
-                toolbarTitle.scaleX = if (scale < minScale) minScale else scale
-                toolbarTitle.scaleY = toolbarTitle.scaleX
             }
         } else if (dyUnconsumed < 0) {
 
@@ -93,11 +88,6 @@ class ToolbarBehavior : CoordinatorLayout.Behavior<AppBarLayout>() {
                 var translate: Float = (toolbarOriginalHeight - toolbar.layoutParams.height) / (toolbarOriginalHeight - toolbarCollapsedHeight)
                 translate *= toolbarOriginalHeight
                 drawerIcon.translationY = -translate
-
-                //--- title
-                val scale = toolbar.layoutParams.height / toolbarOriginalHeight
-                toolbarTitle.scaleX = if (scale < minScale) minScale else scale
-                toolbarTitle.scaleY = toolbarTitle.scaleX
             }
         }
     }

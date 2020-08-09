@@ -17,7 +17,8 @@ import javax.inject.Singleton
     ViewModelFactoryModule::class,
     AndroidSupportInjectionModule::class,
     DBModule::class,
-    WeatherForecastModule::class
+    WeatherForecastModule::class,
+    SearchFragmentModule::class
 ])
 interface WeatherAppComponent: AndroidInjector<DaggerApplication> {
 
