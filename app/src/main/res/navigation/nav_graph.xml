@@ -10,6 +10,10 @@
         android:name="com.popda.weatherforcast.ui.weather_screen.WeatherForecastFragment"
         android:label="weather_forecast_fragment"
         tools:layout="@layout/weather_forecast_fragment" >
+        <argument
+            android:name="cityName"
+            app:argType="string"
+            android:defaultValue=" " />
         <action
             android:id="@+id/action_weatherForecastFragment_to_searchFragment"
             app:destination="@id/searchFragment" />

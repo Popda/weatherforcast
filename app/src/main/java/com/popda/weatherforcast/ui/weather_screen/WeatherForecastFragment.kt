@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.popda.weatherforcast.R
 import com.popda.weatherforcast.data.entity.WeatherForecast
@@ -22,7 +23,9 @@ class WeatherForecastFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+
     private lateinit var viewModel: WeatherForecastViewModel
+    private val args: WeatherForecastFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,9 +40,12 @@ class WeatherForecastFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         initRecyclerView()
         listenViewModel()
-        initSearchButton()
+        initButtons()
         (appbar.layoutParams as CoordinatorLayout.LayoutParams).behavior = ToolbarBehavior()
-        viewModel.getCurrLocation(activity as Activity)
+        if (args.cityName.isNotBlank()) {
+            viewModel.currCity = args.cityName
+            viewModel.loadWeatherForecast(activity as Activity)
+        } else viewModel.getCurrLocation(activity as Activity)
     }
 
     private fun initRecyclerView(){
@@ -60,9 +66,12 @@ class WeatherForecastFragment : Fragment() {
         })
     }
 
-    private fun initSearchButton(){
+    private fun initButtons(){
         drawerIcon.setOnClickListener {
             findNavController().navigate(R.id.action_weatherForecastFragment_to_searchFragment)
+        }
+        geoBtn.setOnClickListener {
+            viewModel.getCurrLocation(activity as Activity)
         }
     }
 

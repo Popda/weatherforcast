@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.popda.weatherforcast.R
 import com.popda.weatherforcast.data.entity.CityEntity
 import com.popda.weatherforcast.interfaces.OnDeleteItemCallback
+import com.popda.weatherforcast.interfaces.OnPickCityCallback
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.search_fragment.*
 import javax.inject.Inject
@@ -47,7 +48,13 @@ class SearchFragment : Fragment(), View.OnClickListener {
                 override fun onItemDelete(cityEntity: CityEntity) {
                     viewModel.deleteCity(cityEntity)
                 }
-            })
+            }, object : OnPickCityCallback{
+                override fun onCityPicked(cityName: String) {
+                    val action = SearchFragmentDirections.actionSearchFragmentToWeatherForecastFragment(cityName)
+                    findNavController().navigate(action)
+                }
+
+            } )
         }
     }
 
@@ -70,7 +77,13 @@ class SearchFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id){
             R.id.backButton -> findNavController().navigateUp()
-            R.id.searchButton ->  findNavController().navigate(R.id.action_searchFragment_to_weatherForecastFragment)
+            R.id.searchButton ->  {
+                val name = viewModel.searchNewLocation(cityNameTv.text.toString(), activity as Activity)
+                if (!name.isNullOrBlank()) {
+                    val action = SearchFragmentDirections.actionSearchFragmentToWeatherForecastFragment(name)
+                    findNavController().navigate(action)
+                }
+            }
             R.id.addToFavButton -> viewModel.addCityToFavorite(cityNameTv.text.toString(), activity as Activity)
         }
     }

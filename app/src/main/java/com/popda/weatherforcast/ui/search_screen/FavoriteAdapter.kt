@@ -8,10 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.popda.weatherforcast.R
 import com.popda.weatherforcast.data.entity.CityEntity
 import com.popda.weatherforcast.interfaces.OnDeleteItemCallback
+import com.popda.weatherforcast.interfaces.OnPickCityCallback
 import kotlinx.android.synthetic.main.city_item.view.*
 
 
-class FavoriteAdapter(private val cb: OnDeleteItemCallback) : RecyclerView.Adapter<FavoriteAdapter.CityItemViewHolder>() {
+class FavoriteAdapter(private val deleteCb: OnDeleteItemCallback, private val cb : OnPickCityCallback) : RecyclerView.Adapter<FavoriteAdapter.CityItemViewHolder>() {
 
     private var cityNames = ArrayList<CityEntity>()
 
@@ -39,9 +40,10 @@ class FavoriteAdapter(private val cb: OnDeleteItemCallback) : RecyclerView.Adapt
 
         fun bindTo(cityItem: CityEntity){
             itemView.apply {
-                this.setOnClickListener {
-                    cb.onItemDelete(cityItem)
+                deleteBtn.setOnClickListener {
+                    deleteCb.onItemDelete(cityItem)
                 }
+                cityTv.setOnClickListener { cb.onCityPicked(cityItem.cityName) }
                 cityTv.text =  cityItem.cityName
             }
         }

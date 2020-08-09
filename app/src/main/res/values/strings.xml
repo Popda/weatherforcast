@@ -13,4 +13,5 @@
     <string name="city_name_hint">City name</string>
     <string name="header">HEADER</string>
     <string name="search_different_city_button">Search different city button</string>
+    <string name="geo_btn_cd">Button to get forcast for current position</string>
 </resources>

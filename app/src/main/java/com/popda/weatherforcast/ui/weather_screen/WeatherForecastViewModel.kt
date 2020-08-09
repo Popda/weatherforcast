@@ -40,7 +40,7 @@ class WeatherForecastViewModel @Inject constructor(private val weatherDataSource
     private val mutableWeatherLiveData: MutableLiveData<List<WeatherForecast>> = MutableLiveData()
     val weatherLiveData: LiveData<List<WeatherForecast>> get() = mutableWeatherLiveData
 
-    private fun loadWeatherForecast(activity: Activity){
+    fun loadWeatherForecast(activity: Activity){
         when {
             currCity.isNotBlank() -> weatherDataSource.getWeatherByCityName(currCity, activity).enqueue(callback)
             ::curLatLong.isInitialized -> weatherDataSource.getWeatherByGeo(curLatLong.first, curLatLong.second).enqueue(callback)
