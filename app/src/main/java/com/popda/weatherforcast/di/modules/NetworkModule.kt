@@ -2,6 +2,7 @@ package com.popda.weatherforcast.di.modules
 
 import android.content.Context
 import com.popda.weatherforcast.BuildConfig
+import com.popda.weatherforcast.data.WeatherApi
 import com.popda.weatherforcast.util.NetworkUtil
 import dagger.Module
 import dagger.Provides
@@ -23,7 +24,7 @@ class NetworkModule {
             .cache(myCache)
             .addInterceptor { chain ->
                 var request = chain.request()
-                request = if (networkUtil.hasNetwork()) //TODO check connectivity
+                request = if (networkUtil.hasNetwork())
                     request.newBuilder().header("Cache-Control", "public, max-age=" + 5).build()
                 else
                     request.newBuilder().header("Cache-Control", "public, only-if-cached, max-stale=" + 60 * 60 * 24 * 7).build()
@@ -39,5 +40,11 @@ class NetworkModule {
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BuildConfig.BASE_URL)
             .build()
+    }
+
+    @Singleton
+    @Provides
+    fun providePixabayApi(retrofit: Retrofit): WeatherApi {
+        return retrofit.create(WeatherApi::class.java)
     }
 }

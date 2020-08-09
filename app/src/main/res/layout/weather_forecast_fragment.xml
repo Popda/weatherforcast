@@ -20,12 +20,12 @@
             app:elevation="0dp">
 
             <FrameLayout
-                android:id="@+id/appbar_container"
+                android:id="@+id/appbarContainer"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize">
 
                 <ImageView
-                    android:id="@+id/drawer_icon"
+                    android:id="@+id/drawerIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -34,7 +34,7 @@
                     app:srcCompat="@drawable/ic_launcher_foreground" />
 
                 <View
-                    android:id="@+id/toolbar_title"
+                    android:id="@+id/toolbarTitle"
                     android:layout_width="140dp"
                     android:layout_height="14dp"
                     android:layout_gravity="center"
@@ -44,7 +44,7 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"

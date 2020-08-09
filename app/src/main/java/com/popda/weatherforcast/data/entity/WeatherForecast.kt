@@ -1,7 +1,6 @@
 package com.popda.weatherforcast.data.entity
 
 import com.google.gson.annotations.SerializedName
-
 /*
 Copyright (c) 2020 Kotlin Data Classes Generated from JSON powered by http://www.json2kotlin.com
 
@@ -14,12 +13,19 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
 
-data class BaseResponse (
+data class WeatherForecast (
 
-    @SerializedName("lat") val lat : Double,
-    @SerializedName("lon") val lon : Double,
-    @SerializedName("timezone") val timezone : String,
-    @SerializedName("timezone_offset") val timezone_offset : Int,
-    @SerializedName("current") val current : Current,
-    @SerializedName("daily") val daily : List<WeatherForecast>
+	@SerializedName("dt") val dt : Long,
+	@SerializedName("sunrise") val sunrise : Int,
+	@SerializedName("sunset") val sunset : Int,
+	@SerializedName("temp") val temp : Temp,
+	@SerializedName("pressure") val pressure : Int,
+	@SerializedName("humidity") val humidity : Int,
+	@SerializedName("dew_point") val dew_point : Double,
+	@SerializedName("wind_speed") val wind_speed : Double,
+	@SerializedName("wind_deg") val wind_deg : Int,
+	@SerializedName("weather") val weather : List<Weather>,
+	@SerializedName("clouds") val clouds : Int,
+	@SerializedName("pop") val pop : Int,
+	@SerializedName("uvi") val uvi : Double
 )
